@@ -1,0 +1,9 @@
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorBusiness\bin\Debug\GeneratorBusiness.dll
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorBusiness\bin\Debug\GeneratorBusiness.pdb
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorBusiness\bin\Debug\GeneratorDataAccess.dll
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorBusiness\bin\Debug\GeneratorDataAccess.pdb
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorBusiness\obj\Debug\GeneratorBusiness.csproj.AssemblyReference.cache
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorBusiness\obj\Debug\GeneratorBusiness.csproj.CoreCompileInputs.cache
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorBusiness\obj\Debug\Generato.FF5D8C38.Up2Date
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorBusiness\obj\Debug\GeneratorBusiness.dll
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorBusiness\obj\Debug\GeneratorBusiness.pdb

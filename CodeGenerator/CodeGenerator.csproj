@@ -86,5 +86,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\GeneratorBusiness\GeneratorBusiness.csproj">
+      <Project>{3078ed34-9525-4371-a0a3-422aedcea0a5}</Project>
+      <Name>GeneratorBusiness</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

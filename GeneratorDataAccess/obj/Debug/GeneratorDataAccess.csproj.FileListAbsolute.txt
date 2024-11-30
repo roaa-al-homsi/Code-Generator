@@ -1,0 +1,6 @@
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorDataAccess\bin\Debug\GeneratorDataAccess.dll
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorDataAccess\bin\Debug\GeneratorDataAccess.pdb
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorDataAccess\obj\Debug\GeneratorDataAccess.csproj.AssemblyReference.cache
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorDataAccess\obj\Debug\GeneratorDataAccess.csproj.CoreCompileInputs.cache
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorDataAccess\obj\Debug\GeneratorDataAccess.dll
+C:\Users\Ruaa\source\repos\CodeGenerator\GeneratorDataAccess\obj\Debug\GeneratorDataAccess.pdb

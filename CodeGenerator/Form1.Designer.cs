@@ -32,7 +32,7 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
             this.cbDatabase = new Guna.UI2.WinForms.Guna2ComboBox();
-            this.cmbTables = new Guna.UI2.WinForms.Guna2ComboBox();
+            this.cbTables = new Guna.UI2.WinForms.Guna2ComboBox();
             this.dgvColumns = new Guna.UI2.WinForms.Guna2DataGridView();
             ((System.ComponentModel.ISupportInitialize)(this.dgvColumns)).BeginInit();
             this.SuspendLayout();
@@ -46,30 +46,32 @@
             this.cbDatabase.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDatabase.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
             this.cbDatabase.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cbDatabase.Font = new System.Drawing.Font("Andalus", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbDatabase.Font = new System.Drawing.Font("Andalus", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbDatabase.ForeColor = System.Drawing.Color.Black;
             this.cbDatabase.ItemHeight = 30;
-            this.cbDatabase.Location = new System.Drawing.Point(403, 119);
+            this.cbDatabase.Location = new System.Drawing.Point(105, 129);
             this.cbDatabase.Name = "cbDatabase";
             this.cbDatabase.Size = new System.Drawing.Size(229, 36);
             this.cbDatabase.TabIndex = 0;
+            this.cbDatabase.SelectedIndexChanged += new System.EventHandler(this.cbDatabase_SelectedIndexChanged);
             // 
-            // cmbTables
+            // cbTables
             // 
-            this.cmbTables.AutoRoundedCorners = true;
-            this.cmbTables.BackColor = System.Drawing.Color.Transparent;
-            this.cmbTables.BorderRadius = 17;
-            this.cmbTables.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
-            this.cmbTables.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbTables.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cmbTables.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
-            this.cmbTables.Font = new System.Drawing.Font("Andalus", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cmbTables.ForeColor = System.Drawing.Color.Black;
-            this.cmbTables.ItemHeight = 30;
-            this.cmbTables.Location = new System.Drawing.Point(403, 220);
-            this.cmbTables.Name = "cmbTables";
-            this.cmbTables.Size = new System.Drawing.Size(229, 36);
-            this.cmbTables.TabIndex = 1;
+            this.cbTables.AutoRoundedCorners = true;
+            this.cbTables.BackColor = System.Drawing.Color.Transparent;
+            this.cbTables.BorderRadius = 17;
+            this.cbTables.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
+            this.cbTables.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbTables.FocusedColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbTables.FocusedState.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(94)))), ((int)(((byte)(148)))), ((int)(((byte)(255)))));
+            this.cbTables.Font = new System.Drawing.Font("Andalus", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbTables.ForeColor = System.Drawing.Color.Black;
+            this.cbTables.ItemHeight = 30;
+            this.cbTables.Location = new System.Drawing.Point(105, 230);
+            this.cbTables.Name = "cbTables";
+            this.cbTables.Size = new System.Drawing.Size(229, 36);
+            this.cbTables.TabIndex = 1;
+            this.cbTables.SelectedIndexChanged += new System.EventHandler(this.cbTables_SelectedIndexChanged);
             // 
             // dgvColumns
             // 
@@ -83,7 +85,8 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dgvColumns.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
-            this.dgvColumns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvColumns.ColumnHeadersHeight = 4;
+            this.dgvColumns.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.Color.White;
             dataGridViewCellStyle3.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -93,12 +96,12 @@
             dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.dgvColumns.DefaultCellStyle = dataGridViewCellStyle3;
             this.dgvColumns.GridColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
-            this.dgvColumns.Location = new System.Drawing.Point(734, 119);
+            this.dgvColumns.Location = new System.Drawing.Point(399, 119);
             this.dgvColumns.Name = "dgvColumns";
             this.dgvColumns.RowHeadersVisible = false;
             this.dgvColumns.RowHeadersWidth = 51;
             this.dgvColumns.RowTemplate.Height = 24;
-            this.dgvColumns.Size = new System.Drawing.Size(559, 385);
+            this.dgvColumns.Size = new System.Drawing.Size(894, 385);
             this.dgvColumns.TabIndex = 2;
             this.dgvColumns.ThemeStyle.AlternatingRowsStyle.BackColor = System.Drawing.Color.White;
             this.dgvColumns.ThemeStyle.AlternatingRowsStyle.Font = null;
@@ -111,7 +114,7 @@
             this.dgvColumns.ThemeStyle.HeaderStyle.BorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.None;
             this.dgvColumns.ThemeStyle.HeaderStyle.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvColumns.ThemeStyle.HeaderStyle.ForeColor = System.Drawing.Color.White;
-            this.dgvColumns.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvColumns.ThemeStyle.HeaderStyle.HeaightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.EnableResizing;
             this.dgvColumns.ThemeStyle.HeaderStyle.Height = 4;
             this.dgvColumns.ThemeStyle.ReadOnly = false;
             this.dgvColumns.ThemeStyle.RowsStyle.BackColor = System.Drawing.Color.White;
@@ -129,7 +132,7 @@
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(1370, 647);
             this.Controls.Add(this.dgvColumns);
-            this.Controls.Add(this.cmbTables);
+            this.Controls.Add(this.cbTables);
             this.Controls.Add(this.cbDatabase);
             this.Name = "Form1";
             this.Text = "Code Generator";
@@ -142,7 +145,7 @@
         #endregion
 
         private Guna.UI2.WinForms.Guna2ComboBox cbDatabase;
-        private Guna.UI2.WinForms.Guna2ComboBox cmbTables;
+        private Guna.UI2.WinForms.Guna2ComboBox cbTables;
         private Guna.UI2.WinForms.Guna2DataGridView dgvColumns;
     }
 }
