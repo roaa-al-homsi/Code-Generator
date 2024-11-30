@@ -17,5 +17,9 @@ namespace GeneratorBusiness
         {
             return GeneratorData.AllColumnsForSpecificTable(tableName, databaseName);
         }
+        public static int NumberOfColumnsInSpecificTable(string tableName, string nameDB)
+        {
+            return GeneratorData.GetNumberOfColumnsInSpecificTable(tableName, nameDB);
+        }
     }
 }

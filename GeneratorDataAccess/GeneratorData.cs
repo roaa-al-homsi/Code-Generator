@@ -50,6 +50,35 @@ namespace GeneratorDataAccess
             return dt;
 
         }
+        public static int GetNumberOfColumnsInSpecificTable(string tableName, string nameDB)
+        {
+            int numberOfColumns = 0;
+            string query = $@" use [{nameDB}]
+                          SELECT COUNT(*) AS ColumnCount
+                             FROM INFORMATION_SCHEMA.COLUMNS
+                              WHERE TABLE_NAME = @tableName AND TABLE_SCHEMA = 'dbo';";
+
+
+            using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@tableName", tableName);
+                    try
+                    {
+                        connection.Open();
+                        object result = command.ExecuteScalar();
+                        if (result != null && int.TryParse(result.ToString(), out int columnsCount))
+                        {
+                            numberOfColumns = columnsCount;
+                        }
+                    }
+                    catch (Exception ex) { }
+
+                }
+            }
+            return numberOfColumns;
+        }
     }
 }
 

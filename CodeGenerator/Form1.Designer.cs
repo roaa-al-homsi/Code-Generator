@@ -34,6 +34,8 @@
             this.cbDatabase = new Guna.UI2.WinForms.Guna2ComboBox();
             this.cbTables = new Guna.UI2.WinForms.Guna2ComboBox();
             this.dgvColumns = new Guna.UI2.WinForms.Guna2DataGridView();
+            this.labCountColumns = new Guna.UI2.WinForms.Guna2HtmlLabel();
+            this.guna2HtmlLabel1 = new Guna.UI2.WinForms.Guna2HtmlLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvColumns)).BeginInit();
             this.SuspendLayout();
             // 
@@ -125,12 +127,36 @@
             this.dgvColumns.ThemeStyle.RowsStyle.SelectionBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(231)))), ((int)(((byte)(229)))), ((int)(((byte)(255)))));
             this.dgvColumns.ThemeStyle.RowsStyle.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(71)))), ((int)(((byte)(69)))), ((int)(((byte)(94)))));
             // 
+            // labCountColumns
+            // 
+            this.labCountColumns.AutoSize = false;
+            this.labCountColumns.BackColor = System.Drawing.Color.Transparent;
+            this.labCountColumns.Font = new System.Drawing.Font("Andalus", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labCountColumns.Location = new System.Drawing.Point(180, 433);
+            this.labCountColumns.Name = "labCountColumns";
+            this.labCountColumns.Size = new System.Drawing.Size(154, 35);
+            this.labCountColumns.TabIndex = 3;
+            this.labCountColumns.Text = "guna2HtmlLabel1";
+            // 
+            // guna2HtmlLabel1
+            // 
+            this.guna2HtmlLabel1.AutoSize = false;
+            this.guna2HtmlLabel1.BackColor = System.Drawing.Color.Transparent;
+            this.guna2HtmlLabel1.Font = new System.Drawing.Font("Andalus", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.guna2HtmlLabel1.Location = new System.Drawing.Point(-1, 433);
+            this.guna2HtmlLabel1.Name = "guna2HtmlLabel1";
+            this.guna2HtmlLabel1.Size = new System.Drawing.Size(166, 35);
+            this.guna2HtmlLabel1.TabIndex = 4;
+            this.guna2HtmlLabel1.Text = "Number Of Columns:";
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.LightSteelBlue;
             this.ClientSize = new System.Drawing.Size(1370, 647);
+            this.Controls.Add(this.guna2HtmlLabel1);
+            this.Controls.Add(this.labCountColumns);
             this.Controls.Add(this.dgvColumns);
             this.Controls.Add(this.cbTables);
             this.Controls.Add(this.cbDatabase);
@@ -147,6 +173,8 @@
         private Guna.UI2.WinForms.Guna2ComboBox cbDatabase;
         private Guna.UI2.WinForms.Guna2ComboBox cbTables;
         private Guna.UI2.WinForms.Guna2DataGridView dgvColumns;
+        private Guna.UI2.WinForms.Guna2HtmlLabel labCountColumns;
+        private Guna.UI2.WinForms.Guna2HtmlLabel guna2HtmlLabel1;
     }
 }
 

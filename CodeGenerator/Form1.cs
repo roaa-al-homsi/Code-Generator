@@ -39,7 +39,8 @@ namespace CodeGenerator
         }
         private void cbTables_SelectedIndexChanged(object sender, EventArgs e)
         {
-            dgvColumns.DataSource = Generator.AllNamesColumnsInSpecificTables(cbTables.SelectedItem.ToString(), cbDatabase.Text);
+            dgvColumns.DataSource = Generator.AllNamesColumnsInSpecificTables(cbTables.Text, cbDatabase.Text);
+            labCountColumns.Text = Generator.NumberOfColumnsInSpecificTable(cbTables.Text, cbDatabase.Text).ToString();
         }
     }
 }
