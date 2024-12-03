@@ -7,7 +7,6 @@ namespace GeneratorDataAccess
 {
     public static class GeneratorData
     {
-
         public static DataTable AllDatabaseInSqlServer()
         {
             return GenericData.All("SELECT name FROM sys.databases WHERE database_id>4  ORDER BY name;");
@@ -26,7 +25,7 @@ namespace GeneratorDataAccess
         {
             string query = $@"
             USE [{databaseName}];
-            SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @tableName ORDER BY ORDINAL_POSITION;";
+            SELECT COLUMN_NAME, DATA_TYPE, CHARACTER_MAXIMUM_LENGTH,IS_NULLABLE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = @tableName ORDER BY ORDINAL_POSITION;";
 
             DataTable dt = new DataTable();
 
@@ -79,6 +78,47 @@ namespace GeneratorDataAccess
             }
             return numberOfColumns;
         }
+
+        public static int Add(string Name, DateTime BirthDate, string Gender, string Phone, string Email, int CountryId, string Address, string ImagePath)
+        {
+            int IdNewPerson = 0;
+
+            string query = @"INSERT INTO Persons (Name, BirthDate, Gender, Phone, Email, CountryId, Address, ImagePath)
+                     VALUES (@Name, @BirthDate, @Gender, @Phone, @Email, @CountryId, @Address, @ImagePath);
+                     SELECT SCOPE_IDENTITY();";
+
+            using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Name", Name);
+                    command.Parameters.AddWithValue("@BirthDate", BirthDate);
+                    command.Parameters.AddWithValue("@Gender", Gender);
+                    command.Parameters.AddWithValue("@Phone", Phone);
+                    command.Parameters.AddWithValue("@Email", Email);
+                    command.Parameters.AddWithValue("@CountryId", CountryId);
+                    command.Parameters.AddWithValue("@Address", Address);
+                    command.Parameters.AddWithValue("@ImagePath", !string.IsNullOrWhiteSpace(ImagePath) ? ImagePath : (object)DBNull.Value);
+                    try
+                    {
+                        connection.Open();
+                        object result = command.ExecuteScalar();
+                        if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                        {
+                            IdNewPerson = insertedID;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log or handle the exception as needed
+                    }
+                }
+            }
+
+            return IdNewPerson;
+        }
+
+
     }
 }
 
