@@ -7,8 +7,6 @@ namespace GeneratorBusiness
 {
     public class Generator
     {
-
-
         public static DataTable AllNamesDatabase()
         {
             return GeneratorData.AllDatabaseInSqlServer();
@@ -25,46 +23,64 @@ namespace GeneratorBusiness
         {
             return GeneratorData.GetNumberOfColumnsInSpecificTable(tableName, nameDB);
         }
-
-        public static StringBuilder Add(string parametersMethod, string query, string parameters, StringBuilder stringBuilderCommandParameters)
+        public static string Add(string parametersMethod, string query, StringBuilder stringBuilderCommandParameters)
         {
-            StringBuilder stringBuilder = new StringBuilder();
-
-            string addMethod = $@" public static int Add ({parametersMethod}) 
+            string addMethodSyntax = $@" public static int Add ({parametersMethod}) 
             {{
-             int newId = 0;
-             string query = ""{query}"";
-             using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
-            {{
-               using (SqlCommand command = new SqlCommand(query, connection))
-            {{
-                          {stringBuilderCommandParameters}
-             try
-            {{
-                         connection.Open();
-                        object result = command.ExecuteScalar();
-                        if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                     int newId = 0;
+                     string query = ""{query}"";
+                        using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
                         {{
-                            newId = insertedID;
-                        }}
+                              using (SqlCommand command = new SqlCommand(query, connection))
+                                 {{
+                                           {stringBuilderCommandParameters}
+                                                    try
+                                                     {{
+                                                            connection.Open();
+                                                            object result = command.ExecuteScalar();
+                                                            if (result != null && int.TryParse(result.ToString(), out int insertedID))
+                                                            {{
+                                                                   newId = insertedID;
+                                                            }}
 
-            }}
-             catch(Exception ex) {{}}
- 
-            }}
-            }}
+                                                      }}
+                                                      catch(Exception ex) {{}}
+                                  }}
+                          }}
 
              return newId;
             }}  ";
-            stringBuilder.Append(addMethod);
-            return stringBuilder;
 
+            return addMethodSyntax;
         }
 
+        public static string Update(string parametersMethod, string query, string columnsWithValues, StringBuilder stringBuilderCommandParameters)
+        {
+            string updateMethodSyntax = $@" public static bool Update ({parametersMethod}) 
+            {{
+                     int RowsAffected = 0;
+                     string query = ""{query}"";
+                        using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+                        {{
+                              using (SqlCommand command = new SqlCommand(query, connection))
+                                 {{
+                                           {stringBuilderCommandParameters}
+                                                    try
+                                                     {{
+                                                            connection.Open();
+                                                            RowsAffected = command.ExecuteNonQuery();
+                                                      }}
+                                                      catch(Exception ex) {{}}
+                                  }}
+                          }}
 
+            return RowsAffected > 0;
+            }}  ";
 
+            return updateMethodSyntax;
+        }
 
-
+        //SqlDbType
 
 
     }

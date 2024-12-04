@@ -6,10 +6,10 @@ namespace GeneratorDataAccess
 {
     public static class GenericData
     {
-        static public DataTable All(string query)
+        static public DataTable All(string query, string databaseName = "master")
         {
             DataTable dt = new DataTable();
-            using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+            using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString(databaseName)))
             {
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
