@@ -122,6 +122,16 @@ namespace GeneratorBusiness
             return allMethodSyntax;
         }
 
+        public static string DeleteById(string tableName, string pk, string datatypePK)
+        {
+            string allMethodSyntax = $@"  static public bool Delete({datatypePK} {pk})
+        {{
+            return GenericData.Delete(""delete {tableName} where {pk} = @{pk}, ""@{pk}"", {pk});
+        }}          ";
+
+            return allMethodSyntax;
+        }
+
         //SqlDbType
 
 

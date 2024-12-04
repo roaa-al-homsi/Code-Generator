@@ -214,7 +214,7 @@ namespace CodeGenerator
             stringBuilder.AppendLine(ProcessUpdateMethod(cbTables.Text));
             stringBuilder.AppendLine(ProcessGetByIdMethod(cbTables.Text));
             stringBuilder.AppendLine(ProcessAllMethod(cbTables.Text));
-
+            stringBuilder.AppendLine(ProcessDeleteMethod(cbTables.Text));
             return stringBuilder;
         }
         private static string ProcessAddMethod(string tableName)
@@ -243,6 +243,11 @@ namespace CodeGenerator
         {
             return Generator.All(tableName);
         }
+        private string ProcessDeleteMethod(string tableName)
+        {
+
+            return Generator.DeleteById(tableName, GetPrimaryKey(), GetDataTypePrimaryKey());
+        }
         private void btnViewDataAccessLayer_Click(object sender, EventArgs e)
         {
             richTxtContantLayers.Clear();
@@ -263,6 +268,23 @@ namespace CodeGenerator
             }
 
             return pk.EndsWith("Id", StringComparison.OrdinalIgnoreCase) ? pk : "Id";
+        }
+
+        private static string GetDataTypePrimaryKey()
+        {
+            if (NameColumnWithDataType.Count == 0)
+            {
+                return "dic is empty";
+            }
+
+            string datatypePk = NameColumnWithDataType[NameColumnWithDataType.Keys.First()].DataType;
+
+            if (string.IsNullOrWhiteSpace(datatypePk))
+            {
+                return "int";
+            }
+
+            return datatypePk;
         }
     }
 }
