@@ -276,7 +276,6 @@ namespace CodeGenerator
 
             return pk.EndsWith("Id", StringComparison.OrdinalIgnoreCase) ? pk : "Id";
         }
-
         private static string GetDataTypePrimaryKey()
         {
             if (NameColumnWithDataType.Count == 0)
@@ -292,6 +291,32 @@ namespace CodeGenerator
             }
 
             return datatypePk;
+        }
+
+        //Generator Generic Methods 
+        private string ProcessGenericAllMethod()
+        {
+            return Generator.GenericAll();
+        }
+        private string ProcessGenericDeleteMethod()
+        {
+            return Generator.GenericDelete();
+        }
+        private string ProcessGenericExistMethod()
+        {
+            return Generator.GenericExist();
+        }
+        private StringBuilder _GenerateGenericDataAccessMethods()
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine(ProcessGenericAllMethod());
+            sb.AppendLine(ProcessGenericDeleteMethod());
+            sb.AppendLine(ProcessGenericExistMethod());
+            return sb;
+        }
+        private void btnViewGenericMethods_Click(object sender, EventArgs e)
+        {
+            richTxtContantLayers.Text = _GenerateGenericDataAccessMethods().ToString();
         }
     }
 }

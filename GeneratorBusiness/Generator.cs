@@ -122,14 +122,6 @@ namespace GeneratorBusiness
 
             return deleteMethodSyntax;
         }
-        public static string All(string tableName)
-        {
-            string allMethodSyntax = $@"static public DataTable All()
-            {{
-           return GenericData.All(""select * from {tableName}"");
-            }}";
-            return allMethodSyntax;
-        }
         public static string ExistByPK(string tableName, string pk, string datatypePK)
         {
             string existMethodSyntax = $@"static public bool Exist({datatypePK} {pk})
@@ -139,8 +131,94 @@ namespace GeneratorBusiness
 
             return existMethodSyntax;
         }
+        public static string All(string tableName)
+        {
+            string allMethodSyntax = $@"static public DataTable All()
+            {{
+           return GenericData.All(""select * from {tableName}"");
+            }}";
+            return allMethodSyntax;
+        }
 
 
+        //Generic Methods
+        public static string GenericAll()
+        {
+            string genericAllMethodSyntax = $@"   static public DataTable All(string query)
+        {{
+            DataTable dt = new DataTable();
+            using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+            {{
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {{
+                    try
+                    {{
+                        connection.Open();
+                        SqlDataReader Reader = command.ExecuteReader();
+                        if (Reader.HasRows)
+                        {{
+                            dt.Load(Reader);
+                        }}
+                    }}
+                    catch (Exception ex) {{ }}
+                }}
+            }}
+            return dt;
+        }}";
+
+            return genericAllMethodSyntax;
+        }
+        public static string GenericDelete()
+        {
+            string genericDeleteMethodSyntax = $@" static public bool Delete<T>(string query, string ParameterName, T DeleteBy)
+        {{
+            int RowsAffected = 0;
+            using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+            {{
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {{
+                    command.Parameters.AddWithValue(ParameterName, DeleteBy);
+
+                    try
+                    {{
+                        connection.Open();
+                        RowsAffected = command.ExecuteNonQuery();
+                    }}
+                    catch (Exception ex) {{ return false; }}
+                }}
+            }}
+
+            return RowsAffected > 0;
+        }}";
+
+
+            return genericDeleteMethodSyntax;
+        }
+        public static string GenericExist()
+        {
+            string genericExistMethodSyntax = $@"static public bool Exist<T>(string query, string ParameterName, T ParameterValue)
+        {{
+            bool IsFound = false;
+            using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+            {{
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {{
+                    command.Parameters.AddWithValue(ParameterName, ParameterValue);
+                    try
+                    {{
+                        connection.Open();
+                        SqlDataReader Reader = command.ExecuteReader();
+                        IsFound = Reader.HasRows;
+                        Reader.Close();
+                    }}
+                    catch (Exception ex) {{ }}
+                }}
+            }}
+            return IsFound;
+        }}";
+
+            return genericExistMethodSyntax;
+        }
         //SqlDbType
 
     }
