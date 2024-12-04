@@ -113,6 +113,15 @@ namespace GeneratorBusiness
 
             return updateMethodSyntax;
         }
+        public static string DeleteByPk(string tableName, string pk, string datatypePK)
+        {
+            string deleteMethodSyntax = $@"  static public bool Delete({datatypePK} {pk})
+        {{
+            return GenericData.Delete(""delete {tableName} where {pk} = @{pk}"", ""@{pk}"", {pk});
+        }}          ";
+
+            return deleteMethodSyntax;
+        }
         public static string All(string tableName)
         {
             string allMethodSyntax = $@"static public DataTable All()
@@ -121,19 +130,18 @@ namespace GeneratorBusiness
             }}";
             return allMethodSyntax;
         }
-
-        public static string DeleteById(string tableName, string pk, string datatypePK)
+        public static string ExistByPK(string tableName, string pk, string datatypePK)
         {
-            string allMethodSyntax = $@"  static public bool Delete({datatypePK} {pk})
+            string existMethodSyntax = $@"static public bool Exist({datatypePK} {pk})
         {{
-            return GenericData.Delete(""delete {tableName} where {pk} = @{pk}, ""@{pk}"", {pk});
-        }}          ";
+            return GenericData.Exist(""select Found=1 from {tableName} where {pk}= @{pk}"", ""@{pk}"", {pk});
+        }}";
 
-            return allMethodSyntax;
+            return existMethodSyntax;
         }
 
-        //SqlDbType
 
+        //SqlDbType
 
     }
 }

@@ -215,6 +215,8 @@ namespace CodeGenerator
             stringBuilder.AppendLine(ProcessGetByIdMethod(cbTables.Text));
             stringBuilder.AppendLine(ProcessAllMethod(cbTables.Text));
             stringBuilder.AppendLine(ProcessDeleteMethod(cbTables.Text));
+            stringBuilder.AppendLine(ProcessExistMethod(cbTables.Text));
+
             return stringBuilder;
         }
         private static string ProcessAddMethod(string tableName)
@@ -246,7 +248,12 @@ namespace CodeGenerator
         private string ProcessDeleteMethod(string tableName)
         {
 
-            return Generator.DeleteById(tableName, GetPrimaryKey(), GetDataTypePrimaryKey());
+            return Generator.DeleteByPk(tableName, GetPrimaryKey(), GetDataTypePrimaryKey());
+        }
+        private string ProcessExistMethod(string tableName)
+        {
+
+            return Generator.ExistByPK(tableName, GetPrimaryKey(), GetDataTypePrimaryKey());
         }
         private void btnViewDataAccessLayer_Click(object sender, EventArgs e)
         {
