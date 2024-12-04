@@ -118,7 +118,6 @@ namespace GeneratorDataAccess
 
             return IdNewPerson;
         }
-
         public static bool Update(int Id, string Name, DateTime BirthDate, string Gender, string Phone, string Email, int CountryId, string Address, string ImagePath)
         {
             int RowsAffected = 0;
@@ -159,38 +158,38 @@ namespace GeneratorDataAccess
         }
         static public bool GetPersonById(int Id, ref String Name, ref DateTime BirthDate, ref string Gender, ref string Phone, ref string Email, ref int CountryId, ref string Address, ref string ImagePath)
         {
-            SqlConnection connection = new SqlConnection(SettingData.ConnectionString());
             string query = @"select * from Persons where Id =@Id";
-
             bool IsFound = false;
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue("@Id", Id);
-            try
+            using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString()))
             {
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                if (reader.Read())
+                using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    IsFound = true;
-                    Id = (int)reader["Id"];
-                    Name = (string)reader["Name"];
-                    BirthDate = (DateTime)reader["BirthDate"];
-                    Gender = (string)reader["Gender"];
-                    Phone = (string)reader["Phone"];
-                    Email = (string)reader["Email"];
-                    CountryId = (int)reader["CountryId"];
-                    Address = (string)reader["Address"];
-                    ImagePath = (reader["ImagePath"] != DBNull.Value) ? (string)reader["ImagePath"] : string.Empty;
+                    command.Parameters.AddWithValue("@Id", Id);
+                    try
+                    {
+                        connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+                        if (reader.Read())
+                        {
+                            IsFound = true;
+                            Id = (int)reader["Id"];
+                            Name = (string)reader["Name"];
+                            BirthDate = (DateTime)reader["BirthDate"];
+                            Gender = (string)reader["Gender"];
+                            Phone = (string)reader["Phone"];
+                            Email = (string)reader["Email"];
+                            CountryId = (int)reader["CountryId"];
+                            Address = (string)reader["Address"];
+                            ImagePath = (reader["ImagePath"] != DBNull.Value) ? (string)reader["ImagePath"] : string.Empty;
+                        }
+                        else
+                        {
+                            IsFound = false;
+                        }
+                    }
+                    catch { Exception exception; }
                 }
-                else
-                {
-                    IsFound = false;
-                }
-
-                reader.Close();
             }
-            catch { Exception exception; }
-            finally { connection.Close(); }
             return IsFound;
         }
         static public int GetPersonIdByName(string name)
@@ -219,7 +218,6 @@ namespace GeneratorDataAccess
             }
             return idPerson;
         }
-
         static public bool Delete<T>(string query, string ParameterName, T DeleteBy)
         {
             int RowsAffected = 0;
@@ -236,6 +234,9 @@ namespace GeneratorDataAccess
             finally { connection.Close(); }
             return RowsAffected > 0;
         }
+
+
+
 
     }
 }

@@ -7,11 +7,14 @@
       "RelativeMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGenerator.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGenerator.csproj|C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
-      "RelativeMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGenerator.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+      "AbsoluteMoniker": "D:0:0:{500CB576-3DF6-4261-A220-3E2192B82ED1}|..\\GeneratorDataAccess\\GeneratorDataAccess.csproj|c:\\users\\ruaa\\source\\repos\\codegenerator\\generatordataaccess\\generatordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{3078ED34-9525-4371-A0A3-422AEDCEA0A5}|..\\GeneratorBusiness\\GeneratorBusiness.csproj|c:\\users\\ruaa\\source\\repos\\codegenerator\\generatorbusiness\\generator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGenerator.csproj|C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGenerator.csproj|solutionrelative:form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     },
     {
       "AbsoluteMoniker": "D:0:0:{500CB576-3DF6-4261-A220-3E2192B82ED1}|..\\GeneratorDataAccess\\GeneratorDataAccess.csproj|c:\\users\\ruaa\\source\\repos\\codegenerator\\generatordataaccess\\settingdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
@@ -19,9 +22,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGenerator.csproj|C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}",
       "RelativeMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGenerator.csproj|solutionrelative:app.config||{FA3CD31E-987B-443A-9B81-186104E8DAC1}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{500CB576-3DF6-4261-A220-3E2192B82ED1}|..\\GeneratorDataAccess\\GeneratorDataAccess.csproj|c:\\users\\ruaa\\source\\repos\\codegenerator\\generatordataaccess\\generatordata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -35,19 +35,20 @@
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 1,
               "Title": "GeneratorData.cs",
               "DocumentMoniker": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\GeneratorDataAccess\\GeneratorData.cs",
               "RelativeDocumentMoniker": "..\\GeneratorDataAccess\\GeneratorData.cs",
               "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\GeneratorDataAccess\\GeneratorData.cs",
               "RelativeToolTip": "..\\GeneratorDataAccess\\GeneratorData.cs",
-              "ViewState": "AgIAAHQAAAAAAAAAAAAowAAAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAswJ4AAABCAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-04T14:30:13.19Z"
+              "WhenOpened": "2024-12-04T14:30:13.19Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 3,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\Form1.cs",
               "RelativeDocumentMoniker": "Form1.cs",
@@ -59,7 +60,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 5,
               "Title": "App.config",
               "DocumentMoniker": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\App.config",
               "RelativeDocumentMoniker": "App.config",
@@ -71,7 +72,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 3,
+              "DocumentIndex": 4,
               "Title": "SettingData.cs",
               "DocumentMoniker": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\GeneratorDataAccess\\SettingData.cs",
               "RelativeDocumentMoniker": "..\\GeneratorDataAccess\\SettingData.cs",
@@ -89,9 +90,10 @@
               "RelativeDocumentMoniker": "..\\GeneratorBusiness\\Generator.cs",
               "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\GeneratorBusiness\\Generator.cs",
               "RelativeToolTip": "..\\GeneratorBusiness\\Generator.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAYwBkAAAB1AAAAAAAAAA==",
+              "ViewState": "AgIAABYAAAAAAAAAAAAcwFIAAACRAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-11-29T20:11:08.557Z"
+              "WhenOpened": "2024-11-29T20:11:08.557Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -101,7 +103,7 @@
               "RelativeDocumentMoniker": "Form1.cs",
               "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\Form1.cs \u2B24",
               "RelativeToolTip": "Form1.cs \u2B24",
-              "ViewState": "AgIAAG0AAAAAAAAAAAAYwL8AAAArAAAAAAAAAA==",
+              "ViewState": "AgIAANoAAAAAAAAAAAAAAO8AAAAJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-11-29T18:44:35.265Z",
               "EditorCaption": ""

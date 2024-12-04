@@ -54,7 +54,7 @@ namespace GeneratorBusiness
             return addMethodSyntax;
         }
 
-        public static string Update(string parametersMethod, string query, string columnsWithValues, StringBuilder stringBuilderCommandParameters)
+        public static string Update(string parametersMethod, string query, StringBuilder stringBuilderCommandParameters)
         {
             string updateMethodSyntax = $@" public static bool Update ({parametersMethod}) 
             {{
@@ -75,6 +75,42 @@ namespace GeneratorBusiness
                           }}
 
             return RowsAffected > 0;
+            }}  ";
+
+            return updateMethodSyntax;
+        }
+
+        public static string GetById(string parametersMethod, string query, string CommandParameters, StringBuilder stringBuilderGetValuesFromDB)
+        {
+            string updateMethodSyntax = $@" public static bool GetById ({parametersMethod}) 
+            {{
+                   bool IsFound = false;
+                     string query = ""{query}"";
+                        using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+                        {{
+                              using (SqlCommand command = new SqlCommand(query, connection))
+                                 {{
+                                           {CommandParameters}
+                                                    try
+                                                     {{
+                                                            connection.Open();
+                                                               SqlDataReader reader = command.ExecuteReader();
+                           if (reader.Read())
+                        {{
+                            IsFound = true;
+                            {stringBuilderGetValuesFromDB}
+                        
+                        }}
+                        else
+                        {{
+                            IsFound = false;
+                        }}
+                                                      }}
+                                                      catch(Exception ex) {{}}
+                                  }}
+                          }}
+
+            return IsFound ;
             }}  ";
 
             return updateMethodSyntax;

@@ -180,11 +180,40 @@ namespace CodeGenerator
             }
             return StringBuilderCommandParameters;
         }
+        private StringBuilder _FillStringBuilderGetValuesFromDB()
+        {//     Address = (string)reader[""Address""];
+         //ImagePath = (reader[""ImagePath""] != DBNull.Value) ? (string)reader[""ImagePath""] : string.Empty;
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var dty in NameColumnWithDataType)
+            {
+                if (dty.Value.IsNull)
+                {
+                    if (string.Equals(dty.Value.DataType, "string", StringComparison.OrdinalIgnoreCase))
+                    {
+                        stringBuilder.AppendLine($@"{dty.Key} = reader [""{dty.Key}""] != DBNull.Value ? ({dty.Value.DataType})reader [""{dty.Key}""]: string.Empty;");
+                    }
+                    if (string.Equals(dty.Value.DataType, "int", StringComparison.OrdinalIgnoreCase))
+                    {
+                        stringBuilder.AppendLine((dty.Key).EndsWith("Id", StringComparison.OrdinalIgnoreCase) ? $@"{dty.Key} = reader [""{dty.Key}""] != DBNull.Value ? ({dty.Value.DataType})reader [""{dty.Key}""]: -1;" :
+                        $@"{dty.Key} = reader [""{dty.Key}""] != DBNull.Value ? ({dty.Value.DataType})reader [""{dty.Key}""]: 0;");
+                    }
+                }
+                else
+                {
+                    stringBuilder.AppendLine($@"{dty.Key} = ({dty.Value.DataType})reader [""{dty.Key}""];");
+                }
+
+            }
+            return stringBuilder;
+        }
+
+
         private StringBuilder _DataAccessLayer()
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine(ProcessAddMethod(cbTables.Text));
             stringBuilder.AppendLine(ProcessUpdateMethod(cbTables.Text));
+            stringBuilder.AppendLine(ProcessGetByIdMethod(cbTables.Text));
             return stringBuilder;
         }
         private static string ProcessAddMethod(string tableName)
@@ -196,11 +225,18 @@ namespace CodeGenerator
         }
         private static string ProcessUpdateMethod(string tableName)
         {
-            string columnsWithValues = string.Join(",", NameColumnWithDataType.Select(dty => $"{dty.Key} = @{dty.Key}"));
+            string columnsWithValues = string.Join(",", NameColumnWithDataType.Select(dty => $"{dty.Key} = @{dty.Key}")); //(Name=@Name,Age=@Age)
             string pk = GetPrimaryKey();
             string query = $@"update {tableName} set {columnsWithValues}  WHERE {pk}=@{pk};";
 
-            return Generator.Update(ParametersMethod, query, columnsWithValues, StringBuilderCommandParameters);//here problem
+            return Generator.Update(ParametersMethod, query, StringBuilderCommandParameters);
+        }
+        private string ProcessGetByIdMethod(string tableName)
+        {
+            string pk = GetPrimaryKey();
+            string query = $@"select * from {tableName}  WHERE {pk}=@{pk};";
+            ParametersMethod = string.Join(",", NameColumnWithDataType.Select(dty => dty.Key == "Id" ? $"{dty.Value.DataType} {dty.Key}" : $" ref {dty.Value.DataType} {dty.Key}"));
+            return Generator.GetById(ParametersMethod, query, $"command.Parameters.AddWithValue(\"@{pk}\",{pk});", _FillStringBuilderGetValuesFromDB());
         }
         private void btnViewDataAccessLayer_Click(object sender, EventArgs e)
         {
