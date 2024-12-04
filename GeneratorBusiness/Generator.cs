@@ -53,7 +53,6 @@ namespace GeneratorBusiness
 
             return addMethodSyntax;
         }
-
         public static string Update(string parametersMethod, string query, StringBuilder stringBuilderCommandParameters)
         {
             string updateMethodSyntax = $@" public static bool Update ({parametersMethod}) 
@@ -79,7 +78,6 @@ namespace GeneratorBusiness
 
             return updateMethodSyntax;
         }
-
         public static string GetById(string parametersMethod, string query, string CommandParameters, StringBuilder stringBuilderGetValuesFromDB)
         {
             string updateMethodSyntax = $@" public static bool GetById ({parametersMethod}) 
@@ -114,6 +112,14 @@ namespace GeneratorBusiness
             }}  ";
 
             return updateMethodSyntax;
+        }
+        public static string All(string tableName)
+        {
+            string allMethodSyntax = $@"static public DataTable All()
+            {{
+           return GenericData.All(""select * from {tableName}"");
+            }}";
+            return allMethodSyntax;
         }
 
         //SqlDbType

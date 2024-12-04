@@ -218,22 +218,7 @@ namespace GeneratorDataAccess
             }
             return idPerson;
         }
-        static public bool Delete<T>(string query, string ParameterName, T DeleteBy)
-        {
-            int RowsAffected = 0;
-            SqlConnection connection = new SqlConnection(SettingData.ConnectionString());
-            SqlCommand command = new SqlCommand(query, connection);
-            command.Parameters.AddWithValue(ParameterName, DeleteBy);
 
-            try
-            {
-                connection.Open();
-                RowsAffected = command.ExecuteNonQuery();
-            }
-            catch (Exception ex) { return false; }
-            finally { connection.Close(); }
-            return RowsAffected > 0;
-        }
 
 
 

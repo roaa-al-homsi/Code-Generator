@@ -207,13 +207,14 @@ namespace CodeGenerator
             return stringBuilder;
         }
 
-
         private StringBuilder _DataAccessLayer()
         {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.AppendLine(ProcessAddMethod(cbTables.Text));
             stringBuilder.AppendLine(ProcessUpdateMethod(cbTables.Text));
             stringBuilder.AppendLine(ProcessGetByIdMethod(cbTables.Text));
+            stringBuilder.AppendLine(ProcessAllMethod(cbTables.Text));
+
             return stringBuilder;
         }
         private static string ProcessAddMethod(string tableName)
@@ -237,6 +238,10 @@ namespace CodeGenerator
             string query = $@"select * from {tableName}  WHERE {pk}=@{pk};";
             ParametersMethod = string.Join(",", NameColumnWithDataType.Select(dty => dty.Key == "Id" ? $"{dty.Value.DataType} {dty.Key}" : $" ref {dty.Value.DataType} {dty.Key}"));
             return Generator.GetById(ParametersMethod, query, $"command.Parameters.AddWithValue(\"@{pk}\",{pk});", _FillStringBuilderGetValuesFromDB());
+        }
+        private string ProcessAllMethod(string tableName)
+        {
+            return Generator.All(tableName);
         }
         private void btnViewDataAccessLayer_Click(object sender, EventArgs e)
         {
