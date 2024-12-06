@@ -7,6 +7,14 @@ namespace GeneratorBusiness
 {
     public class Generator
     {
+        private static string CreateConnection
+        {
+            get { return "SqlConnection connection = new SqlConnection(SettingData.ConnectionString)"; }
+        }
+        private static string CreateCommand
+        {
+            get { return "SqlCommand command = new SqlCommand(query, connection)"; }
+        }
         public static DataTable AllNamesDatabase()
         {
             return GeneratorData.AllDatabaseInSqlServer();
@@ -19,19 +27,17 @@ namespace GeneratorBusiness
         {
             return GeneratorData.AllColumnsForSpecificTable(tableName, databaseName);
         }
-        public static int NumberOfColumnsInSpecificTable(string tableName, string nameDB)
-        {
-            return GeneratorData.GetNumberOfColumnsInSpecificTable(tableName, nameDB);
-        }
+
+        #region Data Access Methods...
         public static string Add(string parametersMethod, string query, StringBuilder stringBuilderCommandParameters)
         {
             string addMethodSyntax = $@" public static int Add ({parametersMethod}) 
             {{
                      int newId = 0;
                      string query = ""{query}"";
-                        using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+                        using ({CreateConnection})
                         {{
-                              using (SqlCommand command = new SqlCommand(query, connection))
+                              using ({CreateCommand})
                                  {{
                                            {stringBuilderCommandParameters}
                                                     try
@@ -59,9 +65,9 @@ namespace GeneratorBusiness
             {{
                      int RowsAffected = 0;
                      string query = ""{query}"";
-                        using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+                        using ({CreateConnection})
                         {{
-                              using (SqlCommand command = new SqlCommand(query, connection))
+                              using ({CreateCommand})
                                  {{
                                            {stringBuilderCommandParameters}
                                                     try
@@ -80,13 +86,13 @@ namespace GeneratorBusiness
         }
         public static string GetById(string parametersMethod, string query, string CommandParameters, StringBuilder stringBuilderGetValuesFromDB)
         {
-            string updateMethodSyntax = $@" public static bool GetById ({parametersMethod}) 
+            string updateMethodSyntax = $@" public static bool Get({parametersMethod}) 
             {{
                    bool IsFound = false;
                      string query = ""{query}"";
-                        using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+                        using ({CreateConnection})
                         {{
-                              using (SqlCommand command = new SqlCommand(query, connection))
+                              using ({CreateCommand})
                                  {{
                                            {CommandParameters}
                                                     try
@@ -139,17 +145,17 @@ namespace GeneratorBusiness
             }}";
             return allMethodSyntax;
         }
+        #endregion
 
-
-        //Generic Methods
+        #region Generic Methods...
         public static string GenericAll()
         {
             string genericAllMethodSyntax = $@"   static public DataTable All(string query)
         {{
             DataTable dt = new DataTable();
-            using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+            using ({CreateConnection})
             {{
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using ({CreateCommand})
                 {{
                     try
                     {{
@@ -173,9 +179,9 @@ namespace GeneratorBusiness
             string genericDeleteMethodSyntax = $@" static public bool Delete<T>(string query, string ParameterName, T DeleteBy)
         {{
             int RowsAffected = 0;
-            using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+            using ({CreateConnection})
             {{
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using ({CreateCommand})
                 {{
                     command.Parameters.AddWithValue(ParameterName, DeleteBy);
 
@@ -199,9 +205,9 @@ namespace GeneratorBusiness
             string genericExistMethodSyntax = $@"static public bool Exist<T>(string query, string ParameterName, T ParameterValue)
         {{
             bool IsFound = false;
-            using (SqlConnection connection = new SqlConnection(SettingData.ConnectionString))
+            using ({CreateConnection})
             {{
-                using (SqlCommand command = new SqlCommand(query, connection))
+                using ({CreateCommand})
                 {{
                     command.Parameters.AddWithValue(ParameterName, ParameterValue);
                     try
@@ -219,7 +225,86 @@ namespace GeneratorBusiness
 
             return genericExistMethodSyntax;
         }
-        //SqlDbType
+        #endregion
 
+        #region Generate Business Layer
+        public static string PublicConstructor(string nameClass, StringBuilder SBAssignPropertiesForPublicConstructorAndFindMethod)
+        {
+            string pCons = $@"  public {nameClass}(){{  {SBAssignPropertiesForPublicConstructorAndFindMethod}
+             _mode = Mode.Add;}}";
+            return pCons;
+        }
+        public static string PrivateConstructor(string nameClass, string ParametersMethod,
+            StringBuilder sbAssignProperties, StringBuilder StringBuilderAssignPropertiesForPublicConstructorAndFindMethod)
+        {
+            string pCons = $@" private {nameClass}({ParametersMethod})
+             {{ 
+             {sbAssignProperties}
+
+            _mode = Mode.Update;}}";
+            return pCons;
+        }
+        public static string UpdateBusiness(string nameClass, string ParametersMethodWithThisKeyword)
+        {
+            string updateBus = $@" private bool _Update() {{ 
+             return {nameClass}Data.Update({ParametersMethodWithThisKeyword}); }}";
+            return updateBus;
+        }
+        public static string SaveBusiness()
+        {
+            string save = $@" public bool Save() {{ 
+            
+              switch (_mode)
+            {{
+                case Mode.Add: {{
+                        _mode = Mode.Update;
+                        return _Add();
+                    }}
+                case Mode.Update: return _Update();
+            }}
+                 return false; 
+                }}";
+            return save;
+        }
+        public static string AllBusiness(string tableName)
+        {
+            string allMethod = $@"  public static DataTable All()
+        {{
+            return {tableName}Data.All();
+        }}";
+            return allMethod;
+        }
+        public static string ExistBusiness(string nameClass, string namePk, string dtPK)
+        {
+            string existMethod = $@"  public static bool Exist({dtPK} {namePk})
+        {{
+            return {nameClass}Data.Exist({namePk});
+        }}  ";
+            return existMethod;
+
+        }
+        public static string DeleteBusiness(string tableName, string namePk, string dtPK)
+        {
+            string deleteMethod = $@" public static bool Delete({dtPK} {namePk}) 
+ {{
+            if (!Exist({namePk}))
+            {{
+                return false;
+            }}
+            else {{  return {tableName}Data.Delete({namePk}); }} }}";
+
+            return deleteMethod;
+        }
+        public static string PrintHeaderClass(string nameClass, StringBuilder stringPropertiesClass)
+        {
+            string headerAndPropertiesClass = $@"public class {nameClass}
+    {{
+        private enum Mode {{ Add, Update }}
+        private Mode _mode;  
+            {stringPropertiesClass}";
+
+            return headerAndPropertiesClass;
+        }
+        #endregion
     }
 }
