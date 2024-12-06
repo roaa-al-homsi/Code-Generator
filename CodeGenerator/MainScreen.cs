@@ -9,7 +9,7 @@ using System.Windows.Forms;
 
 namespace CodeGenerator
 {
-    public partial class Form1 : Form
+    public partial class MainScreen : Form
     {
         private static int _numbersOfRecords = 0;
 
@@ -103,7 +103,7 @@ namespace CodeGenerator
         public static StringBuilder StringBuilderAssignPropertiesForPublicConstructor { get; private set; } // long but great
         public enum Mode { Add, Update };
         private Mode mode;
-        public Form1()
+        public MainScreen()
         {
             InitializeComponent();
 
