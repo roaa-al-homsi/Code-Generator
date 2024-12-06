@@ -31,24 +31,6 @@ namespace CodeGenerator
             }
         }
 
-        public static string Columns2//here problem
-        {
-            get
-            {
-                if (NameColumnWithDataType == null || NameColumnWithDataType.Keys.Count == 0)
-                {
-                    return string.Empty;
-                }
-
-                return string.IsNullOrWhiteSpace(Columns2) ? string.Join(",", NameColumnWithDataType.Keys) : Columns2;
-            }
-            private set
-            {
-                Columns2 = value;
-            }
-        }
-
-
         private static string _values;
         public static string Values
         {
@@ -153,15 +135,11 @@ namespace CodeGenerator
         {
             var dicSqlToCSharpDatatype = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
             {
-             { "int", "int" },
-             { "datetime", "DateTime" },
-             { "bit", "bool" },
-             { "decimal", "decimal" },
-             { "float", "double" },
-             { "char", "char" },
-             { "date", "DateTime" },
-             {"SMALLINT","short" }
-                // this is not enough yes i forgot edit it , you will now forget it now
+             { "int", "int" }, { "datetime", "DateTime" }, { "bit", "bool" }, { "decimal", "decimal" },
+              { "float", "double" },  { "char", "char" },  { "date", "DateTime" }, {"SMALLINT","short" },
+                {"Money","decimal" },  {"NChar","string" },  {"NVarChar","string" },
+                   {"NText","string" },  {"Real","single" },  {"SmallDateTime","DateTime" }, {"SmallMoney","decimal" }
+                , {"TinyInt","byte" }, {"varchar","string" }
             };
             //SqlDbType
             foreach (DataGridViewRow row in dgvColumns.Rows)
@@ -171,19 +149,22 @@ namespace CodeGenerator
                 bool isNull = string.Equals(row.Cells["IS_NULLABLE"]?.Value?.ToString(), "YES", StringComparison.OrdinalIgnoreCase);
 
                 string cSharpDataType = "object";
-
-                if (!string.IsNullOrEmpty(dataType))
+                if (dicSqlToCSharpDatatype.ContainsKey(dataType))
                 {
-                    if (dataType.StartsWith("nvarchar", StringComparison.OrdinalIgnoreCase) ||
-                        dataType.StartsWith("varchar", StringComparison.OrdinalIgnoreCase))
-                    {
-                        cSharpDataType = "string";
-                    }
-                    else if (dicSqlToCSharpDatatype.ContainsKey(dataType))
-                    {
-                        cSharpDataType = dicSqlToCSharpDatatype[dataType];
-                    }
+                    cSharpDataType = dicSqlToCSharpDatatype[dataType];
                 }
+                //if (!string.IsNullOrEmpty(dataType))
+                //{
+                //    if (dataType.StartsWith("nvarchar", StringComparison.OrdinalIgnoreCase) ||
+                //        dataType.StartsWith("varchar", StringComparison.OrdinalIgnoreCase))
+                //    {
+                //        cSharpDataType = "string";
+                //    }
+                //    else if (dicSqlToCSharpDatatype.ContainsKey(dataType))
+                //    {
+                //        cSharpDataType = dicSqlToCSharpDatatype[dataType];
+                //    }
+                //}
                 if (!string.IsNullOrEmpty(name) && !string.IsNullOrEmpty(cSharpDataType))
                 {
                     if (!NameColumnWithDataType.ContainsKey(name))
