@@ -100,7 +100,7 @@ namespace CodeGenerator
         }
         public static Dictionary<string, ColumnInfo> NameColumnWithDataType { get; private set; }
         public static StringBuilder StringBuilderCommandParameters { get; private set; }
-        public static StringBuilder StringBuilderAssignPropertiesForPublicConstructorAndFindMethod { get; private set; } // long but great
+        public static StringBuilder StringBuilderAssignPropertiesForPublicConstructor { get; private set; } // long but great
         public enum Mode { Add, Update };
         private Mode mode;
         public Form1()
@@ -109,7 +109,7 @@ namespace CodeGenerator
 
             NameColumnWithDataType = new Dictionary<string, ColumnInfo>();
             StringBuilderCommandParameters = new StringBuilder();
-            StringBuilderAssignPropertiesForPublicConstructorAndFindMethod = new StringBuilder();
+            StringBuilderAssignPropertiesForPublicConstructor = new StringBuilder();
         }
         private void _FillCmbDatabase()
         {
@@ -144,8 +144,8 @@ namespace CodeGenerator
             NameColumnWithDataType = _FillDictionaryFromDgvColumns();
             StringBuilderCommandParameters.Clear();
             StringBuilderCommandParameters = _FillStringBuilderCommandParameters();
-            StringBuilderAssignPropertiesForPublicConstructorAndFindMethod.Clear();
-            StringBuilderAssignPropertiesForPublicConstructorAndFindMethod = _FillStringBuilderAssignPropertiesForPublicConstructorAndFindMethod();
+            StringBuilderAssignPropertiesForPublicConstructor.Clear();
+            StringBuilderAssignPropertiesForPublicConstructor = _FillStringBuilderAssignPropertiesForPublicConstructor();
             labCountColumns.Text = NameColumnWithDataType.Keys.Count.ToString();
             _numbersOfRecords = Convert.ToInt32(labCountColumns.Text);
         }
@@ -210,9 +210,9 @@ namespace CodeGenerator
                             StringBuilderCommandParameters.AppendLine((dty.Key).EndsWith("Id") ? $@"command.Parameters.AddWithValue( ""@{dty.Key}"", ({dty.Key} == -1)?DBNull.Value : (object){dty.Key});" : $@"command.Parameters.AddWithValue(""@{dty.Key}"",({dty.Key} == 0)?DBNull.Value : (object){dty.Key});");
                             break;
                         case "string":
-                            StringBuilderCommandParameters.AppendLine((dty.Key).EndsWith("Id") ? $@"command.Parameters.AddWithValue( ""@{dty.Key}"", ({dty.Key} == -1)?DBNull.Value : (object){dty.Key});" : $@"command.Parameters.AddWithValue(""@{dty.Key}"",({dty.Key} == 0)?DBNull.Value : (object){dty.Key});");
-                            break;
 
+                            StringBuilderCommandParameters.AppendLine($@"command.Parameters.AddWithValue( ""@{dty.Key}"", !string.IsNullOrWhiteSpace({dty.Key}) ? {dty.Key} : (object)DBNull.Value);");
+                            break;
                     }
                 }
                 else
@@ -248,7 +248,7 @@ namespace CodeGenerator
             }
             return stringBuilder;
         }
-        private StringBuilder _FillStringBuilderAssignPropertiesForPublicConstructorAndFindMethod()
+        private StringBuilder _FillStringBuilderAssignPropertiesForPublicConstructor()
         {
             foreach (var dty in NameColumnWithDataType)
             {
@@ -258,21 +258,21 @@ namespace CodeGenerator
                     case "short":
                     case "byte":
                     case "decimal":
-                        StringBuilderAssignPropertiesForPublicConstructorAndFindMethod.AppendLine(dty.Key.EndsWith("Id") ? $"this.{dty.Key} = -1;" : $"this.{dty.Key} = 0;");
+                        StringBuilderAssignPropertiesForPublicConstructor.AppendLine(dty.Key.EndsWith("Id") ? $"this.{dty.Key} = -1;" : $"this.{dty.Key} = 0;");
                         break;
                     case "string":
-                        StringBuilderAssignPropertiesForPublicConstructorAndFindMethod.AppendLine($"this.{dty.Key} = string.Empty;");
+                        StringBuilderAssignPropertiesForPublicConstructor.AppendLine($"this.{dty.Key} = string.Empty;");
                         break;
                     case "bool":
-                        StringBuilderAssignPropertiesForPublicConstructorAndFindMethod.AppendLine($"this.{dty.Key} = false;");
+                        StringBuilderAssignPropertiesForPublicConstructor.AppendLine($"this.{dty.Key} = false;");
                         break;
                     case "DateTime":
-                        StringBuilderAssignPropertiesForPublicConstructorAndFindMethod.AppendLine($"this.{dty.Key} = DateTime.MinValue;");
+                        StringBuilderAssignPropertiesForPublicConstructor.AppendLine($"this.{dty.Key} = DateTime.MinValue;");
                         break;
 
                 }
             }
-            return StringBuilderAssignPropertiesForPublicConstructorAndFindMethod;
+            return StringBuilderAssignPropertiesForPublicConstructor;
         }
 
 
@@ -298,7 +298,7 @@ namespace CodeGenerator
         {
             string pk = _GetPrimaryKey();
 
-            string query = $@"select * from {tableName}  WHERE {pk}=""@{pk}"";";
+            string query = $@"select * from {tableName}  WHERE {pk}=@{pk};";
             string parametersMethodWithRefKeyword = string.Join(",", NameColumnWithDataType.Select(dty => dty.Key == $"{pk}" ? $"{dty.Value.DataType} {dty.Key}" : $" ref {dty.Value.DataType} {dty.Key}"));
             return Generator.GetById(parametersMethodWithRefKeyword, query, $"command.Parameters.AddWithValue(\"@{pk}\",{pk});", _FillStringBuilderGetValuesFromDB());
             // Great!
@@ -414,7 +414,7 @@ namespace CodeGenerator
             StringBuilder sbPublicConstructor = new StringBuilder();
             //string intStatus = string.Join(";", NameColumnWithDataType.Select(dty => dty.Value.DataType=="int" ? dty.Key.EndsWith("Id")? $"this.{dty.Key} = -1;\n" : $"this.{dty.Key} = 0;\n" 
             //: dty.Value.DataType == "string" ? $"this.{dty.Key} = string.Empty;\n":dty.Value.DataType=="DateTime"? $"this.{dty.Key} = DateTime.MinValue;":string.Empty ));
-            return Generator.PublicConstructor(nameClass, StringBuilderAssignPropertiesForPublicConstructorAndFindMethod);
+            return Generator.PublicConstructor(nameClass, StringBuilderAssignPropertiesForPublicConstructor);
         }
         private string _GeneratePrivateConstructor(string nameClass)
         {
@@ -426,7 +426,7 @@ namespace CodeGenerator
             {
                 sbAssignProperties.AppendLine($"this.{dty.Key} = {dty.Key};");
             }
-            return Generator.PrivateConstructor(nameClass, ParametersMethod, sbAssignProperties, StringBuilderAssignPropertiesForPublicConstructorAndFindMethod);
+            return Generator.PrivateConstructor(nameClass, ParametersMethod, sbAssignProperties, StringBuilderAssignPropertiesForPublicConstructor);
         }
         private StringBuilder _GenerateAddMethod(string nameClass)
         {
@@ -459,13 +459,41 @@ namespace CodeGenerator
         {
             return Generator.DeleteBusiness(nameClass, _GetPrimaryKey(), _GetDataTypePrimaryKey());
         }
+        private StringBuilder _DecelerateNewPropertiesWithinFindMethod()
+        {
+            StringBuilder stringBuilder = new StringBuilder();
+            foreach (var dty in NameColumnWithDataType)
+            {
+                switch (dty.Value.DataType)
+                {
+                    case "int":
+                    case "short":
+                    case "byte":
+                    case "decimal":
+                        stringBuilder.AppendLine(dty.Key.EndsWith("Id", StringComparison.OrdinalIgnoreCase) ? $"{dty.Value.DataType} {dty.Key} = -1;" : $"{dty.Value.DataType} {dty.Key} = 0;");
+                        break;
+                    case "string":
+                        stringBuilder.AppendLine($"{dty.Value.DataType} {dty.Key} = string.Empty;");
+                        break;
+                    case "bool":
+                        stringBuilder.AppendLine($"{dty.Value.DataType} {dty.Key}= false;");
+                        break;
+                    case "DateTime":
+                        stringBuilder.AppendLine($"{dty.Value.DataType} {dty.Key} = DateTime.MinValue;");
+                        break;
+
+                }
+            }
+            return stringBuilder;
+        }
         private StringBuilder _GenerateFindMethod(string nameClass)
         {
             StringBuilder stringBuilderFindMethod = new StringBuilder();
             string par = string.Join(", ", NameColumnWithDataType.Select(dty => dty.Key == "Id" ? $"{dty.Key}" : $" ref {dty.Key}"));
             string pk = _GetPrimaryKey();
-            StringBuilder tempStringBuilder = new StringBuilder(StringBuilderAssignPropertiesForPublicConstructorAndFindMethod.ToString());
-            tempStringBuilder.Replace($"this.{pk} = -1;", "");
+
+            StringBuilder tempStringBuilder = new StringBuilder(_DecelerateNewPropertiesWithinFindMethod().ToString());
+            tempStringBuilder.Replace($"{_GetDataTypePrimaryKey()} {pk} = -1;", "");
             stringBuilderFindMethod.AppendLine($@" public {nameClass} Find({_GetDataTypePrimaryKey()} {pk})
             {{    {tempStringBuilder} 
                             if ({nameClass}Data.Get({par}))
@@ -498,6 +526,13 @@ namespace CodeGenerator
             richTxtContantLayers.Text = _BusinessLayer().ToString();
         }
         #endregion
+
+        private void btnCopy_Click(object sender, EventArgs e)
+        {
+            richTxtContantLayers.SelectAll(); // Select all text in the RichTextBox
+            richTxtContantLayers.Copy();
+
+        }
     }
 }
 
