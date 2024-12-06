@@ -131,13 +131,13 @@ namespace CodeGenerator
         {
             _FillCmbDatabase();
         }
-        private void cbDatabase_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbDatabase_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             cbTables.Enabled = true;
             cbTables.Items.Clear();
             _FillCmbNamesTables(cbDatabase.SelectedItem.ToString());
         }
-        private void cbTables_SelectedIndexChanged(object sender, EventArgs e)
+        private void cbTables_SelectedIndexChanged_1(object sender, EventArgs e)
         {
             dgvColumns.DataSource = Generator.AllNamesColumnsInSpecificTables(cbTables.Text, cbDatabase.Text);
             NameColumnWithDataType.Clear();
@@ -389,7 +389,7 @@ namespace CodeGenerator
             sb.AppendLine(ProcessGenericExistMethod());
             return sb;
         }
-        private void btnViewGenericMethods_Click(object sender, EventArgs e)
+        private void btnViewGenericMethods_Click_1(object sender, EventArgs e)
         {
             richTxtContantLayers.Text = _GenerateGenericDataAccessMethods().ToString();
         }
@@ -521,17 +521,24 @@ namespace CodeGenerator
 
             return stringBuilder;
         }
-        private void btnViewBuisnessLayer_Click(object sender, EventArgs e)
+        private void btnViewBuisnessLayer_Click_1(object sender, EventArgs e)
         {
             richTxtContantLayers.Text = _BusinessLayer().ToString();
+
         }
         #endregion
 
-        private void btnCopy_Click(object sender, EventArgs e)
+        private void btnCopy_Click_1(object sender, EventArgs e)
         {
-            richTxtContantLayers.SelectAll(); // Select all text in the RichTextBox
+            richTxtContantLayers.SelectAll();
             richTxtContantLayers.Copy();
+        }
 
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            frmLogin frmLogin = new frmLogin();
+            frmLogin.Show();
         }
     }
 }
