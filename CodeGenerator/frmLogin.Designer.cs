@@ -52,6 +52,8 @@
             this.Close.AutoRoundedCorners = true;
             this.Close.BackColor = System.Drawing.Color.Transparent;
             this.Close.BorderRadius = 27;
+            this.Close.CheckedState.CustomBorderColor = System.Drawing.Color.Teal;
+            this.Close.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.Close.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.Close.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.Close.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -59,6 +61,7 @@
             this.Close.FillColor = System.Drawing.Color.Black;
             this.Close.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Close.ForeColor = System.Drawing.Color.Silver;
+            this.Close.HoverState.CustomBorderColor = System.Drawing.Color.Teal;
             this.Close.Location = new System.Drawing.Point(293, 643);
             this.Close.Name = "Close";
             this.Close.Size = new System.Drawing.Size(130, 57);
@@ -72,6 +75,8 @@
             this.btnStart.AutoRoundedCorners = true;
             this.btnStart.BackColor = System.Drawing.Color.Transparent;
             this.btnStart.BorderRadius = 27;
+            this.btnStart.CheckedState.CustomBorderColor = System.Drawing.Color.Teal;
+            this.btnStart.CustomBorderThickness = new System.Windows.Forms.Padding(0, 0, 0, 2);
             this.btnStart.DisabledState.BorderColor = System.Drawing.Color.DarkGray;
             this.btnStart.DisabledState.CustomBorderColor = System.Drawing.Color.DarkGray;
             this.btnStart.DisabledState.FillColor = System.Drawing.Color.FromArgb(((int)(((byte)(169)))), ((int)(((byte)(169)))), ((int)(((byte)(169)))));
@@ -79,6 +84,7 @@
             this.btnStart.FillColor = System.Drawing.Color.Black;
             this.btnStart.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnStart.ForeColor = System.Drawing.Color.Silver;
+            this.btnStart.HoverState.CustomBorderColor = System.Drawing.Color.Teal;
             this.btnStart.Location = new System.Drawing.Point(175, 643);
             this.btnStart.Name = "btnStart";
             this.btnStart.Size = new System.Drawing.Size(130, 57);
@@ -97,6 +103,7 @@
             this.Controls.Add(this.guna2PictureBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Name = "frmLogin";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "frmLogin";
             ((System.ComponentModel.ISupportInitialize)(this.guna2PictureBox1)).EndInit();
             this.ResumeLayout(false);

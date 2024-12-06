@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|c:\\users\\ruaa\\source\\repos\\codegenerator\\codegenerator\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|c:\\users\\ruaa\\source\\repos\\codegenerator\\codegenerator\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|solutionrelative:frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|solutionrelative:frmlogin.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|solutionrelative:mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|c:\\users\\ruaa\\source\\repos\\codegenerator\\codegenerator\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|solutionrelative:mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,20 +26,57 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 3,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "Program.cs",
-              "DocumentMoniker": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\Program.cs",
-              "RelativeDocumentMoniker": "Program.cs",
-              "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\Program.cs",
-              "RelativeToolTip": "Program.cs",
-              "ViewState": "AgIAAAUAAAAAAAAAAAAxwBMAAAAoAAAAAAAAAA==",
+              "DocumentIndex": 3,
+              "Title": "MainScreen.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\MainScreen.cs",
+              "RelativeDocumentMoniker": "MainScreen.cs",
+              "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\MainScreen.cs [Design]",
+              "RelativeToolTip": "MainScreen.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-12-06T19:31:08.043Z",
+              "WhenOpened": "2024-12-06T19:51:21.789Z",
+              "EditorCaption": " [Design]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "MainScreen.cs",
+              "DocumentMoniker": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\MainScreen.cs",
+              "RelativeDocumentMoniker": "MainScreen.cs",
+              "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\MainScreen.cs",
+              "RelativeToolTip": "MainScreen.cs",
+              "ViewState": "AgIAAGQBAAAAAAAAAAA5wHkBAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T19:40:45.735Z",
               "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "frmLogin.cs",
+              "DocumentMoniker": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\frmLogin.cs",
+              "RelativeDocumentMoniker": "frmLogin.cs",
+              "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\frmLogin.cs",
+              "RelativeToolTip": "frmLogin.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAcwBAAAAAJAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T19:38:39.2Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "frmLogin.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\frmLogin.cs",
+              "RelativeDocumentMoniker": "frmLogin.cs",
+              "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\frmLogin.cs [Design]",
+              "RelativeToolTip": "frmLogin.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-12-06T19:38:15.95Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }
