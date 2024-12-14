@@ -25,8 +25,16 @@ This tool saves developers a great deal of time and effort by producing boilerpl
  - Architecture: 3-tier architecture
  - Deployment: Standalone desktop application
 ***
+  ## **Demo Video**
+  [Watch Demo Video](https://youtu.be/OwPIU_IZ52M)
+
+
+  
 ## **Getting Started:**
 
 - Clone the repository:https://github.com/roaa-al-homsi/Code-Generator.git
 - Open the project in Visual Studio.
 - Build and run the application.
+
+
+
