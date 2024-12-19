@@ -428,9 +428,9 @@ namespace CodeGenerator
         {
             return Generator.SaveBusiness();
         }
-        private string _GenerateAllMethod(string tableName)
+        private string _GenerateAllMethod(string nameClass)
         {
-            return Generator.AllBusiness(tableName);
+            return Generator.AllBusiness(nameClass);
         }
         private string _GenerateExistMethod(string nameClass)
         {
@@ -498,6 +498,7 @@ namespace CodeGenerator
             stringBuilder.AppendLine(_GenerateSaveMethod());
             stringBuilder.AppendLine(_GenerateExistMethod(txtNameClass.Text));
             stringBuilder.AppendLine(_GenerateDeleteMethod(txtNameClass.Text));
+            stringBuilder.AppendLine(_GenerateAllMethod(txtNameClass.Text));
             stringBuilder.AppendLine(_GenerateFindMethod(txtNameClass.Text).ToString());
 
             return stringBuilder;
