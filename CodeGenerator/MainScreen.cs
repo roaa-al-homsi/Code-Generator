@@ -269,6 +269,7 @@ namespace CodeGenerator
         }
         private static string ProcessUpdateMethod(string tableName)
         {
+            //I have a mistake in query : Id=@Id this is primary key 
             string columnsWithValues = string.Join(",", NameColumnWithDataType.Select(dty => $"{dty.Key} = @{dty.Key}")); //(Name=@Name,Age=@Age)
             string pk = _GetPrimaryKey();
             string query = $@"update {tableName} set {columnsWithValues}  WHERE {pk}=@{pk};";
@@ -475,7 +476,7 @@ namespace CodeGenerator
 
             StringBuilder tempStringBuilder = new StringBuilder(_DecelerateNewPropertiesWithinFindMethod().ToString());
             tempStringBuilder.Replace($"{_GetDataTypePrimaryKey()} {pk} = -1;", "");
-            stringBuilderFindMethod.AppendLine($@" public {nameClass} Find({_GetDataTypePrimaryKey()} {pk})
+            stringBuilderFindMethod.AppendLine($@" public  static {nameClass} Find({_GetDataTypePrimaryKey()} {pk})
             {{    {tempStringBuilder} 
                             if ({nameClass}Data.Get({par}))
             {{

@@ -90,15 +90,17 @@ namespace GeneratorBusiness
             {{
                    bool IsFound = false;
                      string query = ""{query}"";
+
+                 try {{
                         using ({CreateConnection})
-                        {{
+                        {{   connection.Open();
                               using ({CreateCommand})
                                  {{
                                            {CommandParameters}
-                                                    try
-                                                     {{
-                                                            connection.Open();
-                                                               SqlDataReader reader = command.ExecuteReader();
+                                                    
+                                                          
+                                    using( SqlDataReader reader = command.ExecuteReader())
+                         {{
                            if (reader.Read())
                         {{
                             IsFound = true;
@@ -109,12 +111,16 @@ namespace GeneratorBusiness
                         {{
                             IsFound = false;
                         }}
-                                                      }}
+                           }}                          
+                           }}
+                           }}
+                           }}
                                                       catch(Exception ex) {{}}
+                            return IsFound ;
                                   }}
-                          }}
+                         
 
-            return IsFound ;
+           
             }}  ";
 
             return updateMethodSyntax;
@@ -153,23 +159,28 @@ namespace GeneratorBusiness
             string genericAllMethodSyntax = $@"   static public DataTable All(string query)
         {{
             DataTable dt = new DataTable();
-            using ({CreateConnection})
+            try
             {{
+            using ({CreateConnection})
+            {{  connection.Open();
                 using ({CreateCommand})
                 {{
-                    try
-                    {{
-                        connection.Open();
-                        SqlDataReader Reader = command.ExecuteReader();
+                    
+                       
+                        using(SqlDataReader Reader = command.ExecuteReader())
+                        {{
                         if (Reader.HasRows)
                         {{
                             dt.Load(Reader);
                         }}
-                    }}
-                    catch (Exception ex) {{ }}
-                }}
+                        }}
+                 }}
             }}
-            return dt;
+            }}
+                    catch (Exception ex) {{ }}
+                return dt;
+            }}
+           
         }}";
 
             return genericAllMethodSyntax;
@@ -205,22 +216,28 @@ namespace GeneratorBusiness
             string genericExistMethodSyntax = $@"static public bool Exist<T>(string query, string ParameterName, T ParameterValue)
         {{
             bool IsFound = false;
+try
+{{
             using ({CreateConnection})
             {{
                 using ({CreateCommand})
                 {{
                     command.Parameters.AddWithValue(ParameterName, ParameterValue);
-                    try
-                    {{
+                    
                         connection.Open();
-                        SqlDataReader Reader = command.ExecuteReader();
+                        using(SqlDataReader Reader = command.ExecuteReader())
+                       {{
                         IsFound = Reader.HasRows;
-                        Reader.Close();
-                    }}
-                    catch (Exception ex) {{ }}
-                }}
+                       }}
+                 }}
             }}
-            return IsFound;
+
+}}
+                    catch (Exception ex) {{ }}
+                    return IsFound;
+                
+            }}
+           
         }}";
 
             return genericExistMethodSyntax;
