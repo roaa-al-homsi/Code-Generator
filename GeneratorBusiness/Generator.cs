@@ -274,8 +274,11 @@ try
               switch (_mode)
             {{
                 case Mode.Add: {{
+                         if(_Add())
+                        {{
                         _mode = Mode.Update;
-                        return _Add();
+                        return true ;
+                       }}
                     }}
                 case Mode.Update: return _Update();
             }}
