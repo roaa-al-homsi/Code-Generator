@@ -50,12 +50,29 @@ namespace CodeGenerator
         {
             get
             {
+                StringBuilder stTemp = new StringBuilder();
                 if (NameColumnWithDataType == null || NameColumnWithDataType.Keys.Count == 0)
                 {
                     return string.Empty;
                 }
 
-                return string.IsNullOrWhiteSpace(_parametersMethod) ? string.Join(",", NameColumnWithDataType.Select(dty => $"{dty.Value.DataType} {dty.Key}")) : _parametersMethod;
+                foreach (var item in NameColumnWithDataType)
+                {
+                    if (item.Value.IsNull)
+                    {
+                        stTemp.Append($"{item.Value.DataType} ? {item.Key},");
+
+
+                    }
+                    else
+                    {
+                        stTemp.Append($"{item.Value.DataType} {item.Key},");
+                    }
+                }
+                return stTemp.ToString();
+
+                //This line of code before using nullable datatype.
+                // return string.IsNullOrWhiteSpace(_parametersMethod) ? string.Join(",", NameColumnWithDataType.Select(dty => $"{dty.Value.DataType} {dty.Key}")) : _parametersMethod;
             }
             private set { _parametersMethod = value; }
         }
@@ -69,6 +86,7 @@ namespace CodeGenerator
                 {
                     return string.Empty;
                 }
+
                 return string.IsNullOrWhiteSpace(_parametersMethodWithThisKeyword) ? string.Join(",", NameColumnWithDataType.Select(dty => $@"this.{dty.Key}")) : _parametersMethodWithThisKeyword;
 
             }
