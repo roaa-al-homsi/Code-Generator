@@ -200,19 +200,20 @@ namespace CodeGenerator
             {
                 if (dty.Value.IsNull)
                 {
-                    switch (dty.Value.DataType)
-                    {
-                        case "int":
-                        case "short":
-                        case "byte":
-                        case "decimal":
-                            StringBuilderCommandParameters.AppendLine((dty.Key).EndsWith("Id") ? $@"command.Parameters.AddWithValue( ""@{dty.Key}"", ({dty.Key} == -1)?DBNull.Value : (object){dty.Key});" : $@"command.Parameters.AddWithValue(""@{dty.Key}"",({dty.Key} == 0)?DBNull.Value : (object){dty.Key});");
-                            break;
-                        case "string":
+                    StringBuilderCommandParameters.AppendLine($@"command.Parameters.AddWithValue( ""@{dty.Key}"", ({dty.Key}.HasValue) ? {dty.Key} : (object)DBNull.Value);");
+                    //switch (dty.Value.DataType)
+                    //{
+                    //    case "int":
+                    //    case "short":
+                    //    case "byte":
+                    //    case "decimal":
+                    //        StringBuilderCommandParameters.AppendLine((dty.Key).EndsWith("Id") ? $@"command.Parameters.AddWithValue( ""@{dty.Key}"", ({dty.Key} == -1)?DBNull.Value : (object){dty.Key});" : $@"command.Parameters.AddWithValue(""@{dty.Key}"",({dty.Key} == 0)?DBNull.Value : (object){dty.Key});");
+                    //        break;
+                    //    case "string":
 
-                            StringBuilderCommandParameters.AppendLine($@"command.Parameters.AddWithValue( ""@{dty.Key}"", !string.IsNullOrWhiteSpace({dty.Key}) ? {dty.Key} : (object)DBNull.Value);");
-                            break;
-                    }
+                    //        StringBuilderCommandParameters.AppendLine($@"command.Parameters.AddWithValue( ""@{dty.Key}"", !string.IsNullOrWhiteSpace({dty.Key}) ? {dty.Key} : (object)DBNull.Value);");
+                    //        break;
+                    //}
                 }
                 else
                 {
