@@ -50,7 +50,7 @@ namespace GeneratorBusiness
                                                             }}
 
                                                       }}
-                                                      catch(Exception ex) {{ GenericData.LogException(ex.message,EventLogEntryType.Error)  }}
+                                                      catch(Exception ex) {{ GenericData.LogException(ex.Message,EventLogEntryType.Error);  }}
                                   }}
                           }}
 
@@ -75,7 +75,7 @@ namespace GeneratorBusiness
                                                             connection.Open();
                                                             RowsAffected = command.ExecuteNonQuery();
                                                       }}
-                                                      catch(Exception ex) {{GenericData.LogException(ex.message,EventLogEntryType.Error)}}
+                                                      catch(Exception ex) {{GenericData.LogException(ex.Message,EventLogEntryType.Error);}}
                                   }}
                           }}
 
@@ -115,7 +115,7 @@ namespace GeneratorBusiness
                            }}
                            }}
                            }}
-                                                      catch(Exception ex) {{GenericData.LogException(ex.message,EventLogEntryType.Error)}}
+                                                      catch(Exception ex) {{GenericData.LogException(ex.Message,EventLogEntryType.Error);}}
                             return IsFound ;
                                   }}
                          
@@ -177,7 +177,7 @@ namespace GeneratorBusiness
                  }}
             }}
             }}
-                    catch (Exception ex) {{ LogException (ex.message,EventLogEntryType.Error) }}
+                    catch (Exception ex) {{ LogException (ex.Message,EventLogEntryType.Error); }}
                 return dt;
             }}
            
@@ -203,7 +203,7 @@ namespace GeneratorBusiness
                     }}
                     catch (Exception ex) 
                    {{ 
-                    LogException (ex.message,EventLogEntryType.Error) 
+                    LogException (ex.Message,EventLogEntryType.Error) ;
                     return false; 
                     }}
                 }}
@@ -237,7 +237,7 @@ try
             }}
 
 }}
-                    catch (Exception ex) {{ LogException (ex.message,EventLogEntryType.Error) }}
+                    catch (Exception ex) {{ LogException (ex.Message,EventLogEntryType.Error) ;}}
                     return IsFound;
                 
             }}

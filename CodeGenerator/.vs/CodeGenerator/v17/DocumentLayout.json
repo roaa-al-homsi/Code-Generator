@@ -35,7 +35,7 @@
               "RelativeDocumentMoniker": "..\\GeneratorBusiness\\Generator.cs",
               "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\GeneratorBusiness\\Generator.cs",
               "RelativeToolTip": "..\\GeneratorBusiness\\Generator.cs",
-              "ViewState": "AgIAALgAAAAAAAAAAAAAAHUAAACIAAAAAAAAAA==",
+              "ViewState": "AgIAAHMAAAAAAAAAAAAAAHUAAACJAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-03-16T05:19:48.747Z",
               "EditorCaption": ""
@@ -50,8 +50,7 @@
               "RelativeToolTip": "MainScreen.cs",
               "ViewState": "AgIAAIEBAAAAAAAAAAAQwIkBAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-18T17:59:39.27Z",
-              "EditorCaption": ""
+              "WhenOpened": "2025-01-18T17:59:39.27Z"
             },
             {
               "$type": "Document",
@@ -62,8 +61,7 @@
               "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\MainScreen.cs [Design]",
               "RelativeToolTip": "MainScreen.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-18T17:59:25.889Z",
-              "EditorCaption": " [Design]"
+              "WhenOpened": "2025-01-18T17:59:25.889Z"
             }
           ]
         }
