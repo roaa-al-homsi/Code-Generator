@@ -50,7 +50,7 @@ namespace GeneratorBusiness
                                                             }}
 
                                                       }}
-                                                      catch(Exception ex) {{}}
+                                                      catch(Exception ex) {{ GenericData.LogException(ex.message,EventLogEntryType.Error)  }}
                                   }}
                           }}
 
@@ -75,7 +75,7 @@ namespace GeneratorBusiness
                                                             connection.Open();
                                                             RowsAffected = command.ExecuteNonQuery();
                                                       }}
-                                                      catch(Exception ex) {{}}
+                                                      catch(Exception ex) {{GenericData.LogException(ex.message,EventLogEntryType.Error)}}
                                   }}
                           }}
 
@@ -115,7 +115,7 @@ namespace GeneratorBusiness
                            }}
                            }}
                            }}
-                                                      catch(Exception ex) {{}}
+                                                      catch(Exception ex) {{GenericData.LogException(ex.message,EventLogEntryType.Error)}}
                             return IsFound ;
                                   }}
                          
@@ -177,7 +177,7 @@ namespace GeneratorBusiness
                  }}
             }}
             }}
-                    catch (Exception ex) {{ }}
+                    catch (Exception ex) {{ LogException (ex.message,EventLogEntryType.Error) }}
                 return dt;
             }}
            
@@ -201,7 +201,11 @@ namespace GeneratorBusiness
                         connection.Open();
                         RowsAffected = command.ExecuteNonQuery();
                     }}
-                    catch (Exception ex) {{ return false; }}
+                    catch (Exception ex) 
+                   {{ 
+                    LogException (ex.message,EventLogEntryType.Error) 
+                    return false; 
+                    }}
                 }}
             }}
 
@@ -233,7 +237,7 @@ try
             }}
 
 }}
-                    catch (Exception ex) {{ }}
+                    catch (Exception ex) {{ LogException (ex.message,EventLogEntryType.Error) }}
                     return IsFound;
                 
             }}
@@ -242,6 +246,32 @@ try
 
             return genericExistMethodSyntax;
         }
+        public static string GenericLogException()
+        {
+            string methodSyntax = @"
+          static public void LogException(string EventMessage, EventLogEntryType eventLogEntryType)
+        {
+            string sourceName = ConfigurationManager.AppSettings[""SourceAppName""];
+            try
+            {
+                if (!EventLog.SourceExists(sourceName))
+                {
+                    EventLog.CreateEventSource(sourceName, ConfigurationManager.AppSettings[""EventLogName""]);
+
+                }
+                EventLog.WriteEntry(sourceName, EventMessage, eventLogEntryType);
+            }
+            catch (Exception ex)
+            {
+                EventLog.WriteEntry(sourceName, $""Exception in logException method is : {ex.Message}"", EventLogEntryType.Error);
+
+            }
+        }";
+
+            return methodSyntax;
+
+        }
+
         #endregion
 
         #region Generate Business Layer

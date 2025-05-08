@@ -3,11 +3,11 @@
   "WorkspaceRootPath": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|c:\\users\\ruaa\\source\\repos\\codegenerator\\codegenerator\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|solutionrelative:mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{3078ED34-9525-4371-A0A3-422AEDCEA0A5}|..\\GeneratorBusiness\\GeneratorBusiness.csproj|c:\\users\\ruaa\\source\\repos\\codegenerator\\generatorbusiness\\generator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{3078ED34-9525-4371-A0A3-422AEDCEA0A5}|..\\GeneratorBusiness\\GeneratorBusiness.csproj|c:\\users\\ruaa\\source\\repos\\codegenerator\\generatorbusiness\\generator.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|solutionrelative:mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{93EA4D70-0894-4D50-A9A7-D76B97FD65CA}|CodeGeneratorDesktopUI.csproj|C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\mainscreen.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
@@ -21,7 +21,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 270,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Bookmark",
@@ -29,25 +29,26 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 0,
               "Title": "Generator.cs",
               "DocumentMoniker": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\GeneratorBusiness\\Generator.cs",
               "RelativeDocumentMoniker": "..\\GeneratorBusiness\\Generator.cs",
               "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\GeneratorBusiness\\Generator.cs",
               "RelativeToolTip": "..\\GeneratorBusiness\\Generator.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAB8AAAAoAAAAAAAAAA==",
+              "ViewState": "AgIAALgAAAAAAAAAAAAAAHUAAACIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-03-16T05:19:48.747Z"
+              "WhenOpened": "2025-03-16T05:19:48.747Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 1,
               "Title": "MainScreen.cs",
               "DocumentMoniker": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\MainScreen.cs",
               "RelativeDocumentMoniker": "MainScreen.cs",
-              "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\MainScreen.cs \u2B24",
-              "RelativeToolTip": "MainScreen.cs \u2B24",
-              "ViewState": "AgIAAMMAAAAAAAAAAAAAAM0AAAAlAAAAAAAAAA==",
+              "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\MainScreen.cs",
+              "RelativeToolTip": "MainScreen.cs",
+              "ViewState": "AgIAAIEBAAAAAAAAAAAQwIkBAAA3AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-01-18T17:59:39.27Z",
               "EditorCaption": ""
@@ -58,10 +59,11 @@
               "Title": "MainScreen.cs [Design]",
               "DocumentMoniker": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\MainScreen.cs",
               "RelativeDocumentMoniker": "MainScreen.cs",
-              "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\MainScreen.cs [Design] \u2B24",
-              "RelativeToolTip": "MainScreen.cs [Design] \u2B24",
+              "ToolTip": "C:\\Users\\Ruaa\\source\\repos\\CodeGenerator\\CodeGenerator\\MainScreen.cs [Design]",
+              "RelativeToolTip": "MainScreen.cs [Design]",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-01-18T17:59:25.889Z"
+              "WhenOpened": "2025-01-18T17:59:25.889Z",
+              "EditorCaption": " [Design]"
             }
           ]
         }

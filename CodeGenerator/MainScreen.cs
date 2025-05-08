@@ -382,12 +382,17 @@ namespace CodeGenerator
         {
             return Generator.GenericExist();
         }
+        private string ProcessGenericLogException()
+        {
+            return Generator.GenericLogException();
+        }
         private StringBuilder _GenerateGenericDataAccessMethods()
         {
             StringBuilder sb = new StringBuilder();
             sb.AppendLine(ProcessGenericAllMethod());
             sb.AppendLine(ProcessGenericDeleteMethod());
             sb.AppendLine(ProcessGenericExistMethod());
+            sb.AppendLine(ProcessGenericLogException());
             return sb;
         }
         private void btnViewGenericMethods_Click_1(object sender, EventArgs e)
