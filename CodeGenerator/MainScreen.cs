@@ -46,41 +46,96 @@ namespace CodeGenerator
         }
 
         private static string _parametersMethod;
+
+        //public static string ParametersMethod
+        //{
+        //    get
+        //    {
+        //        StringBuilder stTemp = new StringBuilder();
+        //        if (NameColumnWithDataType == null || NameColumnWithDataType.Keys.Count == 0)
+        //        {
+        //            return string.Empty;
+        //        }
+        //        string nameTheLastItem = NameColumnWithDataType.Keys.LastOrDefault();
+        //        foreach (var item in NameColumnWithDataType)
+        //        {
+        //            if (item.Value.IsNull)
+        //            {
+
+        //                if (item.Value.DataType == "string")
+        //                {
+        //                    if (item.Key == nameTheLastItem)
+        //                    {
+        //                        stTemp.Append($"{item.Value.DataType} {item.Key}");
+        //                    }
+        //                    else
+        //                    {
+        //                        stTemp.Append($"{item.Value.DataType} {item.Key},");
+        //                    }
+
+
+        //                }
+        //                else
+        //                {
+        //                    if (item.Key == nameTheLastItem)
+        //                    {
+        //                        stTemp.Append($"{item.Value.DataType} ? {item.Key}");
+        //                    }
+        //                    else
+        //                    {
+        //                        stTemp.Append($"{item.Value.DataType} ? {item.Key},");
+        //                    }
+        //                }
+
+        //            }
+        //            else
+        //            {
+        //                if (item.Key == nameTheLastItem)
+        //                {
+        //                    stTemp.Append($"{item.Value.DataType} ? {item.Key}");
+        //                }
+        //                else
+        //                {
+        //                    stTemp.Append($"{item.Value.DataType} {item.Key},");
+        //                }
+        //            }
+        //        }
+        //        return stTemp.ToString();
+
+        //        //This line of code before using nullable datatype.
+        //        // return string.IsNullOrWhiteSpace(_parametersMethod) ? string.Join(",", NameColumnWithDataType.Select(dty => $"{dty.Value.DataType} {dty.Key}")) : _parametersMethod;
+        //    }
+        //    private set { _parametersMethod = value; }
+        //}
         public static string ParametersMethod
         {
             get
             {
-                StringBuilder stTemp = new StringBuilder();
-                if (NameColumnWithDataType == null || NameColumnWithDataType.Keys.Count == 0)
+                if (NameColumnWithDataType == null || NameColumnWithDataType.Count == 0)
                 {
                     return string.Empty;
                 }
 
-                foreach (var item in NameColumnWithDataType)
-                {
-                    if (item.Value.IsNull)
+                return string.Join(",",
+                    NameColumnWithDataType.Select(item =>
                     {
+                        var type = item.Value.DataType;
+                        var name = item.Key;
+                        var isNullable = item.Value.IsNull;
 
-                        if (item.Value.DataType == "string")
+                        if (type == "string" && isNullable)
                         {
-                            stTemp.Append($"{item.Value.DataType} {item.Key},");
-
+                            return $"{type} {name}";
+                        }
+                        else if (isNullable)
+                        {
+                            return $"{type} ? {name}";
                         }
                         else
                         {
-                            stTemp.Append($"{item.Value.DataType} ? {item.Key},");
+                            return $"{type} {name}";
                         }
-
-                    }
-                    else
-                    {
-                        stTemp.Append($"{item.Value.DataType} {item.Key},");
-                    }
-                }
-                return stTemp.ToString();
-
-                //This line of code before using nullable datatype.
-                // return string.IsNullOrWhiteSpace(_parametersMethod) ? string.Join(",", NameColumnWithDataType.Select(dty => $"{dty.Value.DataType} {dty.Key}")) : _parametersMethod;
+                    }));
             }
             private set { _parametersMethod = value; }
         }
