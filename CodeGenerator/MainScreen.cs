@@ -225,7 +225,8 @@ namespace CodeGenerator
             //SqlDbType
             foreach (DataGridViewRow row in dgvColumns.Rows)
             {
-                string name = row.Cells["COLUMN_NAME"]?.Value?.ToString();
+                string nameColumnWithTheFirstLetterCapital = row.Cells["COLUMN_NAME"]?.Value?.ToString();
+                string name = char.ToLower(nameColumnWithTheFirstLetterCapital[0]) + nameColumnWithTheFirstLetterCapital.Substring(1);
                 string dataType = row.Cells["DATA_TYPE"]?.Value?.ToString();
                 bool isNull = string.Equals(row.Cells["IS_NULLABLE"]?.Value?.ToString(), "YES", StringComparison.OrdinalIgnoreCase);
 
