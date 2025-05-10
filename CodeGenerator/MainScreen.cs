@@ -60,8 +60,16 @@ namespace CodeGenerator
                 {
                     if (item.Value.IsNull)
                     {
-                        stTemp.Append($"{item.Value.DataType} ? {item.Key},");
 
+                        if (item.Value.DataType == "string")
+                        {
+                            stTemp.Append($"{item.Value.DataType} {item.Key},");
+
+                        }
+                        else
+                        {
+                            stTemp.Append($"{item.Value.DataType} ? {item.Key},");
+                        }
 
                     }
                     else
@@ -200,7 +208,15 @@ namespace CodeGenerator
             {
                 if (dty.Value.IsNull)
                 {
-                    StringBuilderCommandParameters.AppendLine($@"command.Parameters.AddWithValue( ""@{dty.Key}"", ({dty.Key}.HasValue) ? {dty.Key} : (object)DBNull.Value);");
+                    if (dty.Value.DataType.Equals("string"))
+                    {
+                        StringBuilderCommandParameters.AppendLine($@"command.Parameters.AddWithValue( ""@{dty.Key}"", !string.IsNullOrWhiteSpace({dty.Key}) ? {dty.Key} : (object)DBNull.Value);");
+                    }
+                    else
+                    {
+                        StringBuilderCommandParameters.AppendLine($@"command.Parameters.AddWithValue( ""@{dty.Key}"", ({dty.Key}.HasValue) ? {dty.Key} : (object)DBNull.Value);");
+
+                    }
                     //switch (dty.Value.DataType)
                     //{
                     //    case "int":
