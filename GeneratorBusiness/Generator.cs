@@ -187,14 +187,14 @@ namespace GeneratorBusiness
         }
         public static string GenericDelete()
         {
-            string genericDeleteMethodSyntax = $@" static public bool Delete<T>(string query, string ParameterName, T DeleteBy)
+            string genericDeleteMethodSyntax = $@" static public bool Delete<T>(string query, string parameterName, T deleteBy)
         {{
             int RowsAffected = 0;
             using ({CreateConnection})
             {{
                 using ({CreateCommand})
                 {{
-                    command.Parameters.AddWithValue(ParameterName, DeleteBy);
+                    command.Parameters.AddWithValue(parameterName, deleteBy);
 
                     try
                     {{
@@ -217,7 +217,7 @@ namespace GeneratorBusiness
         }
         public static string GenericExist()
         {
-            string genericExistMethodSyntax = $@"static public bool Exist<T>(string query, string ParameterName, T ParameterValue)
+            string genericExistMethodSyntax = $@"static public bool Exist<T>(string query, string parameterName, T parameterValue)
         {{
             bool IsFound = false;
 try
@@ -226,7 +226,7 @@ try
             {{
                 using ({CreateCommand})
                 {{
-                    command.Parameters.AddWithValue(ParameterName, ParameterValue);
+                    command.Parameters.AddWithValue(parameterName, parameterValue);
                     
                         connection.Open();
                         using(SqlDataReader Reader = command.ExecuteReader())
@@ -249,7 +249,7 @@ try
         public static string GenericLogException()
         {
             string methodSyntax = @"
-          static public void LogException(string EventMessage, EventLogEntryType eventLogEntryType)
+          static public void LogException(string eventMessage, EventLogEntryType eventLogEntryType)
         {
             string sourceName = ConfigurationManager.AppSettings[""SourceAppName""];
             try
@@ -259,7 +259,7 @@ try
                     EventLog.CreateEventSource(sourceName, ConfigurationManager.AppSettings[""EventLogName""]);
 
                 }
-                EventLog.WriteEntry(sourceName, EventMessage, eventLogEntryType);
+                EventLog.WriteEntry(sourceName, eventMessage, eventLogEntryType);
             }
             catch (Exception ex)
             {
